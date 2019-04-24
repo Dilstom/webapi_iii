@@ -70,6 +70,16 @@ router.post('/', upperCase, (req, res) => {
   });
 });
 
+router.put('/:id', (req, res) => {
+ const id = req.params.id;
+ const { name } = req.body;
+ db
+  .update(id, { name })
+  .then(user => {
+   res.status(201).json(user);
+  })
+  .catch(err => {
+   res.status(500).json(err);
   });
 });
 
