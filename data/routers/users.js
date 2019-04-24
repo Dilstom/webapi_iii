@@ -42,6 +42,21 @@ router.get('/:id', (req, res) => {
    res.status(500).json(err);
   });
 });
+router.delete('/:id', (req, res) => {
+ const { id } = req.params;
+ db
+  .remove(id)
+  .then(user => {
+   user
+    ? res.json(user)
+    : res
+       .status(404)
+       .json({ message: `The user with id:  ${id} does not exist` });
+  })
+  .catch(err => {
+   res.status(500).json(err);
+  });
+});
   });
 });
 
