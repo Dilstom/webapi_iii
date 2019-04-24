@@ -2,6 +2,17 @@ const express = require('express');
 const db = require('../helpers/userDb');
 const router = express.Router();
 
+function upperCase(req, res, next) {
+ const name = req.body.name;
+ if (name) {
+  const newName = name.toUpperCase();
+  req.body.name = newName;
+  next();
+ } else {
+  res.status(400).json({ message: 'Please, enter a user name' });
+ }
+}
+
 router.get('/', (req, res) => {
  db
   .get()
