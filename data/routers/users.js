@@ -29,6 +29,19 @@ router.get('/posts/:id', (req, res) => {
   });
 });
 
+router.get('/:id', (req, res) => {
+ const { id } = req.params;
+ db
+  .getById(id)
+  .then(user => {
+   user
+    ? res.json(user)
+    : res.status(404).json({ message: "This user doesn't exist" });
+  })
+  .catch(err => {
+   res.status(500).json(err);
+  });
+});
   });
 });
 
