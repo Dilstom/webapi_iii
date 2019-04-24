@@ -57,6 +57,19 @@ router.delete('/:id', (req, res) => {
    res.status(500).json(err);
   });
 });
+
+router.post('/', upperCase, (req, res) => {
+ const name = req.body.name;
+ db
+  .insert({ name })
+  .then(user => {
+   res.status(201).json(user);
+  })
+  .catch(err => {
+   res.status(500).json(err);
+  });
+});
+
   });
 });
 
